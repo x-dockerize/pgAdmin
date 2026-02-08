@@ -34,7 +34,15 @@ Production compose dosyasını varsayılan dosya haline getir:
 cp docker-compose.production.yml docker-compose.yml
 ```
 
-### 3.  Servisleri Başlat
+### Dosya izinlerini ayarlayın:
+
+```bash
+mkdir -p ./.docker/pgAdmin/data
+sudo chown -R 5050:5050 ./.docker/pgAdmin/data
+sudo chmod -R 755 ./.docker/pgAdmin/data
+```
+
+### 4.  Servisleri Başlat
 
 ```ini
 docker compose up -d
