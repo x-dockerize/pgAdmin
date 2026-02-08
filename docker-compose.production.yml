@@ -1,26 +1,26 @@
 services:
-  phpmyadmin:
+  pgAdmin:
     image: dpage/pgadmin4:latest
-    container_name: pgadmin
+    container_name: pgAdmin
     environment:
       PGADMIN_DEFAULT_EMAIL: '${ADMIN_EMAIL}'
       PGADMIN_DEFAULT_PASSWORD: '${ADMIN_PASSWORD}'
     volumes:
-      - ./.docker/pgadmin/data:/var/lib/pgadmin
-      - ./.docker/pgadmin/backups:/backups
+      - ./.docker/pgAdmin/data:/var/lib/pgadmin
+      - ./.docker/pgAdmin/backups:/backups
     networks:
       - traefik-network
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-network"
 
-      - "traefik.http.routers.pgadmin.rule=Host(`${SERVER_HOSTNAME}`)"
-      - "traefik.http.routers.pgadmin.entrypoints=websecure"
-      - "traefik.http.routers.pgadmin.tls.certresolver=le-cloudflare"
-      - "traefik.http.routers.pgadmin.service=pgadmin"
+      - "traefik.http.routers.pgAdmin.rule=Host(`${SERVER_HOSTNAME}`)"
+      - "traefik.http.routers.pgAdmin.entrypoints=websecure"
+      - "traefik.http.routers.pgAdmin.tls.certresolver=le-cloudflare"
+      - "traefik.http.routers.pgAdmin.service=pgAdmin"
 
       # Services
-      - "traefik.http.services.pgadmin.loadbalancer.server.port=80"
+      - "traefik.http.services.pgAdmin.loadbalancer.server.port=80"
     restart: unless-stopped
 
 
