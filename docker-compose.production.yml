@@ -13,16 +13,16 @@ services:
       - traefik-network
       - postgres-network
     labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=traefik-network"
+      - traefik.enable=true
+      - traefik.docker.network=traefik-network
 
-      - "traefik.http.routers.pgAdmin.rule=Host(`${PGADMIN_SERVER_HOSTNAME:?required}`)"
-      - "traefik.http.routers.pgAdmin.entrypoints=websecure"
-      - "traefik.http.routers.pgAdmin.tls.certresolver=le-cloudflare"
-      - "traefik.http.routers.pgAdmin.service=pgAdmin"
+      - traefik.http.routers.pgAdmin.rule=Host(`${PGADMIN_SERVER_HOSTNAME:?required}`)
+      - traefik.http.routers.pgAdmin.entrypoints=websecure
+      - traefik.http.routers.pgAdmin.tls.certresolver=le-cloudflare
+      - traefik.http.routers.pgAdmin.service=pgAdmin
 
       # Services
-      - "traefik.http.services.pgAdmin.loadbalancer.server.port=80"
+      - traefik.http.services.pgAdmin.loadbalancer.server.port=80
 
 
 networks:
