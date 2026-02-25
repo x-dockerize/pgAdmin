@@ -1,6 +1,6 @@
 services:
   pgAdmin:
-    image: dpage/pgadmin4:9.12
+    image: dpage/pgadmin4:${PGADMIN_VERSION:?required}
     container_name: pgAdmin
     restart: unless-stopped
     environment:
