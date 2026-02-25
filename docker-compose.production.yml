@@ -16,7 +16,7 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-network"
 
-      - "traefik.http.routers.pgAdmin.rule=Host(`${SERVER_HOSTNAME}`)"
+      - "traefik.http.routers.pgAdmin.rule=Host(`${PGADMIN_SERVER_HOSTNAME:?required}`)"
       - "traefik.http.routers.pgAdmin.entrypoints=websecure"
       - "traefik.http.routers.pgAdmin.tls.certresolver=le-cloudflare"
       - "traefik.http.routers.pgAdmin.service=pgAdmin"
