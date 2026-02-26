@@ -3,9 +3,7 @@ services:
     image: dpage/pgadmin4:${PGADMIN_VERSION:?required}
     container_name: pgAdmin
     restart: unless-stopped
-    environment:
-      PGADMIN_DEFAULT_EMAIL: '${ADMIN_EMAIL}'
-      PGADMIN_DEFAULT_PASSWORD: '${ADMIN_PASSWORD}'
+    env_file: .env
     volumes:
       - ./.docker/pgAdmin/data:/var/lib/pgadmin
       - ./.docker/pgAdmin/backups:/backups
@@ -19,10 +17,17 @@ services:
       - traefik.http.routers.pgAdmin.rule=Host(`${PGADMIN_SERVER_HOSTNAME:?required}`)
       - traefik.http.routers.pgAdmin.entrypoints=websecure
       - traefik.http.routers.pgAdmin.tls.certresolver=le-cloudflare
+      - traefik.http.routers.pgAdmin.middlewares=trusted@file
       - traefik.http.routers.pgAdmin.service=pgAdmin
 
       # Services
       - traefik.http.services.pgAdmin.loadbalancer.server.port=80
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:80/misc/ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
 
 
 networks:
