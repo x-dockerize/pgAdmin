@@ -80,7 +80,7 @@ PGADMIN_DEFAULT_PASSWORD=$(grep "^PGADMIN_DEFAULT_PASSWORD=" "$ENV_FILE" | cut -
 # --------------------------------------------------
 echo
 echo "==============================================="
-echo "✅ pgAdmin .env başarıyla hazırlandı"
+echo "✅ pgAdmin .env başarıyla hazırlandı!"
 echo "-----------------------------------------------"
 echo "🌐 Hostname      : $PGADMIN_SERVER_HOSTNAME"
 echo "👤 E-posta       : $PGADMIN_DEFAULT_EMAIL"
